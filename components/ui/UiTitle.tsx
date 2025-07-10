@@ -9,8 +9,8 @@ export default UiTitle;
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'open-sans',
     color: 'white',
     textAlign: 'center',
     borderWidth: 2,
