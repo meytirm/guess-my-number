@@ -26,12 +26,19 @@ let maxBoundary = 100;
 function GameScreen({ userNumber, onGameOver }: Props) {
   const initialGuess = generateRandomNumberBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
     }
   }, [currentGuess, userNumber, onGameOver]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+    setCurrentGuess(generateRandomNumberBetween(1, 100, userNumber));
+  }, []);
   function nextGuessHandler(direction: 'higher' | 'lower') {
     if (
       (direction === 'lower' && currentGuess < userNumber) ||
@@ -59,6 +66,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
     );
 
     setCurrentGuess(newRndNumber);
+    setGuessRounds((prevRounds) => [newRndNumber, ...prevRounds]);
   }
   return (
     <View style={styles.screen}>
@@ -79,6 +87,11 @@ function GameScreen({ userNumber, onGameOver }: Props) {
           </View>
         </View>
       </UiCard>
+      <View>
+        {guessRounds.map((guessRound, index) => (
+          <Text key={index}>{guessRound}</Text>
+        ))}
+      </View>
     </View>
   );
 }

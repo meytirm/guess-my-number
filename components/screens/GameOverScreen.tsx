@@ -3,7 +3,7 @@ import UiTitle from '../ui/UiTitle';
 import Colors from '../../constants/colors';
 import PrimaryButton from '../ui/PrimaryButton';
 
-function GameOverScreen() {
+function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }: Props) {
   return (
     <View style={styles.rootContainer}>
       <UiTitle>Game Over!</UiTitle>
@@ -15,10 +15,11 @@ function GameOverScreen() {
       </View>
       <View>
         <Text style={styles.summaryText}>
-          Your phone needed <Text style={styles.highlight}>X</Text> rounds to
-          guess the number <Text style={styles.highlight}>Y</Text>.
+          Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text>{' '}
+          rounds to guess the number{' '}
+          <Text style={styles.highlight}>{userNumber}</Text>.
         </Text>
-        <PrimaryButton>Start New Game</PrimaryButton>
+        <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
       </View>
     </View>
   );
@@ -58,3 +59,9 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+interface Props {
+  roundsNumber: number;
+  userNumber: number;
+  onStartNewGame: () => void;
+}

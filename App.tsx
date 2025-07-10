@@ -4,11 +4,10 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  View,
 } from 'react-native';
 import StartGameScreen from './components/screens/StartGameScreen';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import GameScreen from './components/screens/GameScreen';
 import GameOverScreen from './components/screens/GameOverScreen';
 import { useFonts } from 'expo-font';
@@ -24,6 +23,7 @@ SplashScreen.setOptions({
 export default function App() {
   const [userNumber, setUserNumber] = useState<number | undefined>();
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -32,11 +32,6 @@ export default function App() {
 
   const onLayoutRootView = useCallback(() => {
     if (fontsLoaded) {
-      // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
-      // loading its initial state and rendering its first pixels. So instead,
-      // we hide the splash screen once we know the root view has already
-      // performed layout.
       SplashScreen.hide();
     }
   }, [fontsLoaded]);
@@ -54,6 +49,11 @@ export default function App() {
     setGameIsOver(true);
   }
 
+  function startNewGameHandler() {
+    setUserNumber(undefined);
+    setGuessRounds(0);
+  }
+
   let screen = <StartGameScreen onConfirmNumber={pickedNumberHandler} />;
 
   if (userNumber) {
@@ -63,7 +63,13 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundsNumber={guessRounds}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
   return (
     <LinearGradient
