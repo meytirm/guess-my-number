@@ -1,4 +1,4 @@
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import UiTitle from '../ui/UiTitle';
 import { useEffect, useState } from 'react';
 import NumberContainer from '../game/NumberContainer';
@@ -6,6 +6,7 @@ import PrimaryButton from '../ui/PrimaryButton';
 import UiCard from '../ui/UiCard';
 import { Ionicons } from '@expo/vector-icons';
 import InstructionText from '../ui/InstructionText';
+import GuessLogItem from '../game/GuessLogItem';
 
 function generateRandomNumberBetween(
   min: number,
@@ -68,6 +69,8 @@ function GameScreen({ userNumber, onGameOver }: Props) {
     setCurrentGuess(newRndNumber);
     setGuessRounds((prevRounds) => [newRndNumber, ...prevRounds]);
   }
+
+  const guessRoundsListLength = guessRounds.length;
   return (
     <View style={styles.screen}>
       <UiTitle>Opponent's Guess</UiTitle>
@@ -90,7 +93,12 @@ function GameScreen({ userNumber, onGameOver }: Props) {
       <View>
         <FlatList
           data={guessRounds}
-          renderItem={(item) => <Text>{item.item}</Text>}
+          renderItem={(item) => (
+            <GuessLogItem
+              roundNumber={guessRoundsListLength - item.index}
+              guess={item.item}
+            ></GuessLogItem>
+          )}
           keyExtractor={(item) => item.toString()}
         />
       </View>
