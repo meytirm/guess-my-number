@@ -1,5 +1,4 @@
 import { StyleSheet, Text } from 'react-native';
-import Colors from '../../constants/colors';
 
 function UiTitle({ children }: Props) {
   return <Text style={styles.title}>{children}</Text>;
@@ -17,6 +16,8 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     padding: 12,
     borderRadius: 8,
+    maxWidth: '80%',
+    width: 300,
   },
 });
 
