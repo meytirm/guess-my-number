@@ -31,7 +31,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -90,7 +90,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
           </View>
         </View>
       </UiCard>
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
           renderItem={(item) => (
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 12,
+    alignItems: 'center',
   },
   instructionText: {
     marginBottom: 12,
@@ -122,9 +123,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
+  listContainer: {
+    padding: 16,
+    height: 300,
+  },
 });
 
 interface Props {
   userNumber: number;
-  onGameOver: () => void;
+  onGameOver: (value: number) => void;
 }
