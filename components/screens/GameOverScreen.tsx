@@ -42,7 +42,17 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }: Props) {
             <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess
             the number <Text style={styles.highlight}>{userNumber}</Text>.
           </Text>
-          <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
+          <View
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <PrimaryButton onPress={onStartNewGame}>
+              Start New Gamed
+            </PrimaryButton>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -76,10 +86,10 @@ const styles = StyleSheet.create({
   },
   summaryText: {
     fontFamily: 'open-sans',
-    fontSize: 24,
+    fontSize: 20,
     color: Colors.accent500,
     textAlign: 'center',
-    marginVertical: 24,
+    marginVertical: 8,
   },
   highlight: {
     fontFamily: 'open-sans-bold',
