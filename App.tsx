@@ -73,22 +73,27 @@ export default function App() {
     );
   }
   return (
-    <LinearGradient
-      colors={['#c34195', '#571f4d', '#3e0b30']}
-      style={styles.rootScreen}
-      onLayout={onLayoutRootView}
-    >
-      <ImageBackground
-        source={require('./assets/images/img.png')}
-        resizeMode="cover"
+    <>
+      <StatusBar barStyle="light-content" />
+      <LinearGradient
+        colors={['#c34195', '#571f4d', '#3e0b30']}
         style={styles.rootScreen}
-        imageStyle={{ opacity: 0.1 }}
+        onLayout={onLayoutRootView}
       >
-        <SafeAreaView style={{ ...styles.rootScreen, ...styles.safeAreaView }}>
-          {screen}
-        </SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require('./assets/images/img.png')}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={{ opacity: 0.1 }}
+        >
+          <SafeAreaView
+            style={{ ...styles.rootScreen, ...styles.safeAreaView }}
+          >
+            {screen}
+          </SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
