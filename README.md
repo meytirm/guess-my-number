@@ -1,5 +1,5 @@
 
-1**Install dependencies**
+**Install dependencies**
 
    ```bash
    npm install
@@ -7,7 +7,7 @@
    yarn install
    ```
 
-3. **Start the development server**
+**Start the development server**
 
    ```bash
    expo start
